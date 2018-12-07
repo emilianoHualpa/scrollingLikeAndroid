@@ -10,20 +10,23 @@ import UIKit
 
 class ScrollingViewController: UIViewController {
 
-    @IBOutlet weak var theTable: UITableView!
-    @IBOutlet weak var stickyHeader: UIView!
-    @IBOutlet weak var dissapearingHeader: UIView!
-    @IBOutlet weak var dissapearingHeaderHeight: NSLayoutConstraint!
-    @IBOutlet weak var stickyHeaderHeight: NSLayoutConstraint!
-    @IBOutlet weak var headerViewHeightConstraint: NSLayoutConstraint!
+    @IBOutlet private weak var theTable: UITableView!
+    @IBOutlet private weak var stickyHeader: UIView!
+    @IBOutlet private weak var dissapearingHeader: UIView!
+    @IBOutlet private weak var dissapearingHeaderHeight: NSLayoutConstraint!
+    @IBOutlet private weak var stickyHeaderHeight: NSLayoutConstraint!
+    @IBOutlet private weak var headerViewHeightConstraint: NSLayoutConstraint!
+    @IBOutlet private weak var titleLabel: UILabel!
     
     private var previousScrollOffset: CGFloat = 0
     
-    private var maxHeaderViewHeight: CGFloat = 200
+    private let maxHeaderViewHeight: CGFloat = 200
     private let minHeaderViewHeight: CGFloat = 50
     
-    private var maxDissapearingHeaderHeight: CGFloat = 150
+    private let maxDissapearingHeaderHeight: CGFloat = 150
     private let minDissapearingHeaderHeight: CGFloat = 0
+    private var pageTitle = "Titulo"
+    private var scrollPercent: Float = 0
     
     private var didScroll = false
     private var scrollFix = false
@@ -32,17 +35,12 @@ class ScrollingViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         theTable.separatorStyle = .none
-        title = "Scrolling"
     }
-}
-
-extension ScrollingViewController: UITableViewDelegate {
-    
 }
 
 extension ScrollingViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 20
+        return 30
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -52,8 +50,6 @@ extension ScrollingViewController: UITableViewDataSource {
         cell?.textLabel?.textColor = .white
         return cell!
     }
-    
-    
 }
 
 extension ScrollingViewController: UIScrollViewDelegate {
@@ -100,11 +96,20 @@ extension ScrollingViewController: UIScrollViewDelegate {
             
             if newHeigthDissapearing != self.dissapearingHeaderHeight.constant {
                 self.dissapearingHeaderHeight.constant = newHeigthDissapearing
-                self.dissapearingHeader.layer.opacity = Float(newHeigthDissapearing * maxDissapearingHeaderHeight/10000)
-
+                scrollPercent = Float(newHeigthDissapearing * maxDissapearingHeaderHeight/100)
+                pageTitle = scrollPercent.description
             }
             
             self.previousScrollOffset = scrollView.contentOffset.y
+            
+            if (scrollPercent < 50){
+                title = pageTitle
+            } else {
+                title = ""
+            }
+            
+            self.titleLabel.text = scrollView.contentOffset.y.description
+
         }
         
         if scrollView.contentOffset.y < 0 && headerIsCollapsed {

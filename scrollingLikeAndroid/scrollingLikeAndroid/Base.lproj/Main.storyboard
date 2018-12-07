@@ -4,7 +4,6 @@
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -30,8 +29,19 @@
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tI5-Ij-EaV">
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="150"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Titulo" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bgO-GJ-BcV">
+                                                <rect key="frame" x="20" y="98.666666666666657" width="280" height="31.333333333333343"/>
+                                                <fontDescription key="fontDescription" type="boldSystem" pointSize="26"/>
+                                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
                                         <color key="backgroundColor" red="0.0" green="0.29411764709999999" blue="0.62745098040000002" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
+                                            <constraint firstAttribute="bottom" secondItem="bgO-GJ-BcV" secondAttribute="bottom" constant="20" id="9Fi-cg-7B5"/>
+                                            <constraint firstItem="bgO-GJ-BcV" firstAttribute="leading" secondItem="tI5-Ij-EaV" secondAttribute="leading" constant="20" id="Gcy-WZ-3r5"/>
+                                            <constraint firstAttribute="trailing" secondItem="bgO-GJ-BcV" secondAttribute="trailing" constant="75" id="PVO-Vb-u21"/>
                                             <constraint firstAttribute="height" constant="150" id="cIb-mf-ZAC"/>
                                         </constraints>
                                     </view>
@@ -91,6 +101,7 @@
                         <outlet property="stickyHeader" destination="c6K-AL-N9u" id="aeH-Oe-Vvp"/>
                         <outlet property="stickyHeaderHeight" destination="hkf-iT-sbK" id="OEh-Li-Wsd"/>
                         <outlet property="theTable" destination="umT-Bx-Qk2" id="MrK-Hh-AZZ"/>
+                        <outlet property="titleLabel" destination="bgO-GJ-BcV" id="muG-0S-pFs"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
