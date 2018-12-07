@@ -22,8 +22,23 @@
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="c6K-AL-N9u" userLabel="StickyHeader">
                                         <rect key="frame" x="0.0" y="150" width="375" height="50"/>
+                                        <subviews>
+                                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="swF-fH-iEm">
+                                                <rect key="frame" x="20" y="10" width="335" height="31"/>
+                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <segments>
+                                                    <segment title="First"/>
+                                                    <segment title="Second"/>
+                                                </segments>
+                                                <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            </segmentedControl>
+                                        </subviews>
                                         <color key="backgroundColor" red="0.23137254900000001" green="0.87058823529999996" blue="0.52549019610000003" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
+                                            <constraint firstItem="swF-fH-iEm" firstAttribute="top" secondItem="c6K-AL-N9u" secondAttribute="top" constant="10" id="5gM-JZ-tvK"/>
+                                            <constraint firstAttribute="trailing" secondItem="swF-fH-iEm" secondAttribute="trailing" constant="20" id="Q7D-9z-4eD"/>
+                                            <constraint firstItem="swF-fH-iEm" firstAttribute="leading" secondItem="c6K-AL-N9u" secondAttribute="leading" constant="20" id="ZIr-XY-trr"/>
+                                            <constraint firstAttribute="bottom" secondItem="swF-fH-iEm" secondAttribute="bottom" constant="10" id="bAr-jO-NbN"/>
                                             <constraint firstAttribute="height" constant="50" id="hkf-iT-sbK"/>
                                         </constraints>
                                     </view>

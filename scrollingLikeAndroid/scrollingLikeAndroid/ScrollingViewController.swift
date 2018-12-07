@@ -45,7 +45,7 @@ extension ScrollingViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "defaultCell")
-        cell?.textLabel?.text = String(indexPath.row) + " Milo"
+        cell?.textLabel?.text = String(indexPath.row) + " Lorem ipsum"
         cell?.backgroundColor = UIColor.random()
         cell?.textLabel?.textColor = .white
         return cell!
@@ -70,15 +70,15 @@ extension ScrollingViewController: UIScrollViewDelegate {
             let isScrollingDown = scrollDiff > 0 && scrollView.contentOffset.y > absoluteTop
             let isScrollingUp = scrollDiff < 0 && scrollView.contentOffset.y < absoluteBottom
             
-            var newHeaderViewHeight = self.headerViewHeightConstraint.constant
+            var newHeaderViewHeight = headerViewHeightConstraint.constant
             if isScrollingDown {
-                newHeaderViewHeight = max(self.minHeaderViewHeight, self.headerViewHeightConstraint.constant - abs(scrollDiff))
+                newHeaderViewHeight = max(minHeaderViewHeight, headerViewHeightConstraint.constant - abs(scrollDiff))
             } else if isScrollingUp {
-                newHeaderViewHeight = min(self.maxHeaderViewHeight, self.headerViewHeightConstraint.constant + abs(scrollDiff))
+                newHeaderViewHeight = min(maxHeaderViewHeight, headerViewHeightConstraint.constant + abs(scrollDiff))
             }
             
-            if newHeaderViewHeight != self.headerViewHeightConstraint.constant {
-                self.headerViewHeightConstraint.constant = newHeaderViewHeight
+            if newHeaderViewHeight != headerViewHeightConstraint.constant {
+                headerViewHeightConstraint.constant = newHeaderViewHeight
                 if !scrollFix {
                     UIView.animate(withDuration: 0.2, animations: {
                         self.view.layoutIfNeeded()
@@ -87,20 +87,20 @@ extension ScrollingViewController: UIScrollViewDelegate {
                 }
             }
             
-            var newHeigthDissapearing = self.dissapearingHeaderHeight.constant
+            var newHeigthDissapearing = dissapearingHeaderHeight.constant
             if isScrollingDown {
-                newHeigthDissapearing = max(self.minDissapearingHeaderHeight, self.dissapearingHeaderHeight.constant - abs(scrollDiff))
+                newHeigthDissapearing = max(minDissapearingHeaderHeight, dissapearingHeaderHeight.constant - abs(scrollDiff))
             } else if isScrollingUp {
-                newHeigthDissapearing = min(self.maxDissapearingHeaderHeight, self.dissapearingHeaderHeight.constant + abs(scrollDiff))
+                newHeigthDissapearing = min(maxDissapearingHeaderHeight, dissapearingHeaderHeight.constant + abs(scrollDiff))
             }
             
-            if newHeigthDissapearing != self.dissapearingHeaderHeight.constant {
-                self.dissapearingHeaderHeight.constant = newHeigthDissapearing
+            if newHeigthDissapearing != dissapearingHeaderHeight.constant {
+                dissapearingHeaderHeight.constant = newHeigthDissapearing
                 scrollPercent = Float(newHeigthDissapearing * maxDissapearingHeaderHeight/100)
                 pageTitle = scrollPercent.description
             }
             
-            self.previousScrollOffset = scrollView.contentOffset.y
+            previousScrollOffset = scrollView.contentOffset.y
             
             if (scrollPercent < 50){
                 title = pageTitle
@@ -108,7 +108,7 @@ extension ScrollingViewController: UIScrollViewDelegate {
                 title = ""
             }
             
-            self.titleLabel.text = scrollView.contentOffset.y.description
+            titleLabel.text = scrollView.contentOffset.y.description
 
         }
         
@@ -129,10 +129,10 @@ extension ScrollingViewController: UIScrollViewDelegate {
     }
     
     func scrollViewDidStopScrolling() {
-        let range = self.maxHeaderViewHeight - self.minHeaderViewHeight
-        let midPoint = self.minHeaderViewHeight + (range / 2)
+        let range = maxHeaderViewHeight - minHeaderViewHeight
+        let midPoint = minHeaderViewHeight + (range / 2)
         
-        if self.headerViewHeightConstraint.constant > midPoint {
+        if headerViewHeightConstraint.constant > midPoint {
             // Expand
             expandHeader()
         } else {
@@ -143,8 +143,8 @@ extension ScrollingViewController: UIScrollViewDelegate {
     
     func expandHeader(){
         headerIsCollapsed = false
-        self.headerViewHeightConstraint.constant = maxHeaderViewHeight
-        self.dissapearingHeaderHeight.constant = maxDissapearingHeaderHeight
+        headerViewHeightConstraint.constant = maxHeaderViewHeight
+        dissapearingHeaderHeight.constant = maxDissapearingHeaderHeight
         UIView.animate(withDuration: 0.2, animations: {
             self.view.layoutIfNeeded()
         })
@@ -152,8 +152,8 @@ extension ScrollingViewController: UIScrollViewDelegate {
     
     func collapseHeader(){
         headerIsCollapsed = true
-        self.headerViewHeightConstraint.constant = minHeaderViewHeight
-        self.dissapearingHeaderHeight.constant = minDissapearingHeaderHeight
+        headerViewHeightConstraint.constant = minHeaderViewHeight
+        dissapearingHeaderHeight.constant = minDissapearingHeaderHeight
         UIView.animate(withDuration: 0.2, animations: {
             self.view.layoutIfNeeded()
         })
